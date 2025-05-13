@@ -1,0 +1,63 @@
+/* src/styles/Footer.css */
+
+.app-footer {
+  background-color: var(--color-bg-primary, #fff9f0);
+  padding: 25px 30px;
+  border-top: 1px solid var(--color-border-light, #f0e0d0);
+  margin-top: 2rem;
+  font-family: var(--font-primary, "Open Sans", sans-serif);
+  color: var(--color-text-secondary, #8d6e63);
+  font-size: 0.9em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.app-footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 1200px; /* Відповідає .app-container, якщо використовується */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-footer__copyright {
+  flex-basis: 100%; /* Займає всю ширину на маленьких екранах */
+  text-align: center;
+}
+
+.app-footer__contacts {
+  flex-basis: 100%; /* Займає всю ширину на маленьких екранах */
+  display: flex;
+  justify-content: center;
+  gap: 25px; /* Відстань між телефонними номерами */
+  flex-wrap: wrap;
+}
+
+.app-footer__phone-link {
+  color: var(--color-text-secondary, #8d6e63);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.app-footer__phone-link:hover {
+  color: var(--color-accent-secondary, #ffab76);
+}
+
+/* Адаптивність для більших екранів */
+@media (min-width: 600px) {
+  .app-footer__content {
+    flex-wrap: nowrap; /* Запобігання переносу на більших екранах */
+  }
+  .app-footer__copyright {
+    flex-basis: auto; /* Повернення до автоматичної ширини */
+    text-align: left;
+  }
+  .app-footer__contacts {
+    flex-basis: auto; /* Повернення до автоматичної ширини */
+    justify-content: flex-end;
+  }
+}

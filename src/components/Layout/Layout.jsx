@@ -1,12 +1,15 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import '../../styles/Layout.css';
 
 export default function Layout({ children }) {
   return (
-    <div style={{ maxWidth: 800, margin: '0 auto', padding: '1rem' }}>
+    <div className="site-container">
       <Header />
-      <main>{children}</main>
+      <main className="main-content">
+        {children}
+      </main>
       <Footer />
     </div>
   );

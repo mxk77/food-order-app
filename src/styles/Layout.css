@@ -1,0 +1,28 @@
+/* src/styles/Layout.css */
+
+.site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Забезпечує мінімальну висоту всього viewport */
+  background-color: var(
+    --color-bg-primary,
+    #fff9f0
+  ); /* Основний фон з global.css */
+}
+
+.main-content {
+  flex-grow: 1; /* Дозволяє цій області розтягуватися, відштовхуючи футер вниз */
+  width: 100%; /* За замовчуванням займає доступну ширину */
+  max-width: 800px; /* Максимальна ширина контентної області, як у вас було */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 1.5rem; /* Відступи для контенту: 2rem зверху/знизу, 1.5rem з боків */
+  box-sizing: border-box;
+}
+
+@media (max-width: 850px) {
+  .main-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
