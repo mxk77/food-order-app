@@ -205,7 +205,6 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     sessionStorage.setItem('isUserLoggedIn', 'false');
-    sessionStorage.removeItem('userData'); // Також видаляємо дані користувача
     setIsLoggedIn(false);
     setShowLogin(true);
     setUserData({ name: '', phone: '', email: '', password: '', addresses: [], hashedPassword: '' });

@@ -5,12 +5,13 @@ import '../../styles/Header.css';
 
 
 export default function Header() {
-  const { items } = useCart();
+  const { totalItemCount } = useCart(); 
+
   return (
     <header className="app-header">
       <Link to="/" className="app-header__logo">
         <span role="img" aria-label="Логотип служби доставки" style={{ marginRight: '10px', fontSize: '1.3em' }}>
-        🚚
+          🚚
         </span>
         FoodDelivery
       </Link>
@@ -29,7 +30,7 @@ export default function Header() {
             isActive ? "app-header__nav-link app-header__nav-link--active" : "app-header__nav-link"
           }
         >
-          Кошик ({items.length})
+          Кошик ({totalItemCount}) 
         </NavLink>
         <NavLink 
           to="/profile" 

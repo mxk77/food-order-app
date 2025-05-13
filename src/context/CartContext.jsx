@@ -33,13 +33,18 @@ export function CartProvider({ children }) {
     return items.reduce((sum, item) => sum + (item.price * (item.quantity || 0)), 0);
   }, [items]);
 
+  const totalItemCount = useMemo(() => {
+    return items.reduce((count, item) => count + (item.quantity || 0), 0);
+  }, [items]);
+
   const contextValue = useMemo(() => ({
     items,
     addToCart,
     clearCart,
     removeItemById,
-    total
-  }), [items, total, addToCart, clearCart, removeItemById]);
+    total,
+    totalItemCount
+  }), [items, total, totalItemCount, addToCart, clearCart, removeItemById]);
 
   return (
     <CartContext.Provider value={contextValue}>
