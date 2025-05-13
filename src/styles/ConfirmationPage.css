@@ -1,0 +1,180 @@
+/* src/styles/OrderCheckoutPage.css */
+
+.confirmation-page-container {
+  background-color: var(--color-card-bg, #ffffff);
+  padding: 30px 35px; /* Збільшено padding */
+  max-width: 650px; /* Трохи ширше */
+  margin: 2.5rem auto;
+  border-radius: var(--border-radius-large, 20px);
+  box-shadow: 0px 8px 25px var(--color-shadow-warm, rgba(180, 140, 100, 0.12)),
+    0px 4px 10px var(--color-shadow-warm, rgba(180, 140, 100, 0.08));
+}
+
+.confirmation-page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-text-headings, #4e4a40);
+  font-size: 2.2em;
+}
+
+.confirmation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Збільшено відстань між групами полів */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Відстань між label та input/error */
+}
+
+.form-label {
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  color: var(--color-text-primary, #5d4037);
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid var(--color-border-light, #f0e0d0);
+  border-radius: var(--border-radius-medium, 12px);
+  background-color: var(--color-bg-input, #fffdf5);
+  color: var(--color-text-primary, #5d4037);
+  font-size: 1em;
+  font-family: var(--font-primary, "Open Sans", sans-serif);
+  box-shadow: inset 0px 1px 3px rgba(180, 140, 100, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder,
+.form-select::placeholder {
+  /* Стилізація плейсхолдера */
+  color: var(--color-text-secondary, #a1887f);
+  opacity: 0.8;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-accent-primary, #ff8c61);
+  box-shadow: inset 0px 1px 3px rgba(180, 140, 100, 0.08),
+    0 0 0 3px rgba(255, 140, 97, 0.25); /* Світіння акцентним кольором */
+}
+
+.form-input--error,
+.form-select.form-input--error {
+  /* Клас для інпутів з помилкою */
+  border-color: var(--color-danger, #e57373);
+  background-color: #fff0f0; /* Легкий червонуватий фон для помилки */
+}
+
+.form-input--error:focus,
+.form-select.form-input--error:focus {
+  border-color: var(--color-danger-hover, #d32f2f);
+  box-shadow: inset 0px 1px 3px rgba(180, 140, 100, 0.08),
+    0 0 0 3px rgba(229, 115, 115, 0.3); /* Світіння кольором небезпеки */
+}
+
+.form-error-message {
+  color: var(--color-danger, #e57373);
+  font-size: 0.875em; /* 14px, якщо базовий 16px */
+  font-weight: 500;
+}
+
+.form-radio-group {
+  display: flex;
+  gap: 20px; /* Відстань між радіо-кнопками */
+  margin-top: 5px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.form-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal; /* Звичайний шрифт для радіо-лейблів */
+  color: var(--color-text-secondary, #8d6e63);
+  cursor: pointer;
+  font-size: 0.95em;
+}
+
+.form-radio-label input[type="radio"] {
+  accent-color: var(--color-accent-primary, #ff8c61);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.confirmation-form__submit-button.btn.btn--primary {
+  width: 100%;
+  padding: 14px 25px;
+  font-size: 1.1em;
+  margin-top: 10px;
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  font-weight: 700;
+  line-height: 1.4;
+
+  border-radius: var(--border-radius-pill, 50px); /* Більш заокруглені */
+  background-color: var(--color-accent-primary-soft, #ffcba4);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border: 2px solid transparent;
+  box-shadow: 0px 3px 8px rgba(180, 140, 100, 0.1); /* Легка тепла тінь */
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.confirmation-form__submit-button.btn.btn--primary:hover {
+  background-color: var(--color-accent-primary-soft-hover, #ffb58a);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: transparent;
+  box-shadow: 0px 4px 12px rgba(180, 140, 100, 0.15);
+  transform: translateY(-1px);
+}
+
+.confirmation-form__submit-button.btn.btn--primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0px 1px 4px rgba(180, 140, 100, 0.1);
+}
+
+.confirmation-page__back-link-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.confirmation-page__back-link {
+  color: var(--color-accent-primary, #ff8c61);
+  text-decoration: none;
+  font-weight: 600;
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  padding: 10px 15px;
+  border-radius: var(--border-radius-medium, 12px);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+
+.confirmation-page__back-link:hover {
+  color: var(--color-accent-secondary, #ffab76);
+  background-color: rgba(255, 237, 213, 0.5); /* Дуже світлий теплий фон */
+}
+
+/* Стилі для екрану підтвердження замовлення */
+.order-confirmed-container {
+  text-align: center;
+}
+
+.confirmation-page-message {
+  font-size: 1.1em;
+  color: var(--color-text-primary, #5d4037);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.confirmation-page-actions .btn {
+  margin-top: 1rem;
+}

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import '../styles/ConfirmationPage.css';
 
-export default function OrderCheckoutPage() {
+export default function ConfirmationPage() {
   const { clearCart } = useCart();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Локальний стан для UI, джерело - sessionStorage
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileData, setProfileData] = useState({ name: '', phone: '', addresses: [] });
   
   const [orderData, setOrderData] = useState({
@@ -15,6 +16,7 @@ export default function OrderCheckoutPage() {
     deliveryTime: '',
   });
 
+  const [formErrors, setFormErrors] = useState({}); // Стан для помилок валідації
   const [useExistingAddress, setUseExistingAddress] = useState(true);
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
@@ -27,54 +29,102 @@ export default function OrderCheckoutPage() {
       if (storedUserData) {
         const parsedData = JSON.parse(storedUserData);
         setProfileData(parsedData);
-
         const hasAddresses = parsedData.addresses && parsedData.addresses.length > 0;
         setUseExistingAddress(hasAddresses);
-
         setOrderData(prev => ({
-          ...prev, // Зберігаємо попередні значення, якщо вони є
+          ...prev,
           name: parsedData.name || '',
           phone: parsedData.phone || '',
           address: hasAddresses ? parsedData.addresses[0] : '',
         }));
       } else {
-        // Неузгоджений стан: прапорець входу true, але даних користувача немає.
-        // Вважаємо користувача неавторизованим.
         setIsLoggedIn(false);
-        sessionStorage.setItem('isUserLoggedIn', 'false'); // Виправляємо sessionStorage
+        sessionStorage.setItem('isUserLoggedIn', 'false');
         setProfileData({ name: '', phone: '', addresses: [] });
-        setOrderData({ name: '', phone: '', address: '', deliveryTime: '' }); // Скидаємо дані замовлення
+        setOrderData({ name: '', phone: '', address: '', deliveryTime: '' });
         setUseExistingAddress(false);
       }
     } else {
-      // Користувач не залогінений або вийшов з системи
       setProfileData({ name: '', phone: '', addresses: [] });
-      // Скидаємо поля, які могли бути заповнені з профілю
       setOrderData(prev => ({
-        name: '',
-        phone: '',
-        address: '',
-        deliveryTime: prev.deliveryTime,
+        name: '', phone: '', address: '',
+        deliveryTime: prev.deliveryTime, // Зберігаємо час, якщо він був введений
       }));
       setUseExistingAddress(false);
     }
   }, []);
 
+  const validateField = (name, value) => {
+    let error = '';
+    switch (name) {
+      case 'name':
+        if (!value.trim()) error = "Ім'я є обов'язковим полем.";
+        else if (value.trim().length < 2) error = "Ім'я має містити щонайменше 2 символи.";
+        else if (!/^[a-zA-Zа-яА-ЯіІїЇєЄґҐ'-\s]+$/.test(value)) error = "Ім'я може містити лише літери, пробіли, дефіс та апостроф.";
+        break;
+      case 'phone':
+        const cleanedPhone = value.replace(/[^\d+]/g, ''); // Видаляємо все, крім цифр та '+'
+        if (!cleanedPhone) error = "Телефон є обов'язковим полем.";
+        else if (!/^(?:\+380\d{9}|0\d{9})$/.test(cleanedPhone)) {
+          error = 'Введіть дійсний український номер (+380ХХХХХХХХХ або 0ХХХХХХХХХ).';
+        }
+        break;
+      case 'address':
+        if (!value.trim()) error = "Адреса є обов'язковим полем.";
+        else if (value.trim().length < 5) error = "Адреса має містити щонайменше 5 символів.";
+        break;
+      case 'deliveryTime':
+        if (!value.trim()) error = "Час доставки є обов'язковим полем.";
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setOrderData(prev => ({ ...prev, [name]: value }));
+    let processedValue = value;
+
+    // Очищаємо помилку для поточного поля при зміні
+    setFormErrors(prevErrors => ({ ...prevErrors, [name]: '' }));
+    
+    setOrderData(prev => ({ ...prev, [name]: processedValue }));
   };
 
-  const handleSelectedAddressChange = (e) => {
-    setOrderData(prev => ({ ...prev, address: e.target.value }));
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    setFormErrors(prevErrors => ({ ...prevErrors, [name]: error }));
   };
+
 
   const handleOrderSubmit = (e) => {
     e.preventDefault();
-    if (!orderData.name.trim() || !orderData.phone.trim() || !orderData.address.trim() || !orderData.deliveryTime.trim()) {
-      alert('Будь ласка, заповніть всі обов\'язкові поля для замовлення.');
+    const currentErrors = {};
+    let formIsValid = true;
+
+    // Валідація всіх полів перед відправкою
+    Object.keys(orderData).forEach(key => {
+      const error = validateField(key, orderData[key]);
+      if (error) {
+        currentErrors[key] = error;
+        formIsValid = false;
+      }
+    });
+    setFormErrors(currentErrors);
+
+    if (!formIsValid) {
+      const firstErrorFieldKey = Object.keys(currentErrors).find(key => currentErrors[key]);
+      if (firstErrorFieldKey) {
+        const firstErrorElement = document.getElementById(firstErrorFieldKey);
+        if (firstErrorElement) {
+          firstErrorElement.focus();
+        }
+      }
       return;
     }
+    
     console.log('Дані замовлення:', orderData);
     clearCart();
     setIsOrderConfirmed(true);
@@ -82,73 +132,86 @@ export default function OrderCheckoutPage() {
 
   if (isOrderConfirmed) {
     return (
-      <div style={styles.container}>
-        <h1>Замовлення підтверджено!</h1>
-        <p>Дякуємо за ваше замовлення. Ми зв’яжемося з вами найближчим часом для уточнення деталей.</p>
-        <p>
-          <Link to="/" style={styles.link}>Повернутись до меню</Link>
-        </p>
+      <div className="confirmation-page-container order-confirmed-container">
+        <h1 className="confirmation-page-title">Замовлення успішно оформлено!</h1>
+        <p className="confirmation-page-message">Дякуємо за ваше замовлення. Ми зв’яжемося з вами найближчим часом для уточнення деталей.</p>
+        <div className="confirmation-page__back-link-container">
+          <Link to="/" className="confirmation-page__back-link">← Повернутись до меню</Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={styles.container}>
-      <h1>Оформлення замовлення</h1>
-      <form onSubmit={handleOrderSubmit} style={styles.form}>
-        <div style={styles.formGroup}>
-          <label htmlFor="name" style={styles.label}>Ім'я:</label>
+    <div className="confirmation-page-container">
+      <h1 className="confirmation-page-title">Оформлення замовлення</h1>
+      <form onSubmit={handleOrderSubmit} className="confirmation-form" noValidate>
+        <div className="form-group">
+          <label htmlFor="name" className="form-label">Ім'я:</label>
           <input
             type="text"
             id="name"
             name="name"
             value={orderData.name}
             onChange={handleChange}
-            style={styles.input}
+            onBlur={handleBlur}
+            className={`form-input ${formErrors.name ? 'form-input--error' : ''}`}
+            aria-invalid={!!formErrors.name}
+            aria-describedby="nameError"
             required
           />
+          {formErrors.name && <span id="nameError" className="form-error-message" aria-live="polite">{formErrors.name}</span>}
         </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="phone" style={styles.label}>Телефон:</label>
+        <div className="form-group">
+          <label htmlFor="phone" className="form-label">Телефон:</label>
           <input
             type="tel"
             id="phone"
             name="phone"
+            placeholder="+380 XX XXX XX XX"
             value={orderData.phone}
             onChange={handleChange}
-            style={styles.input}
+            onBlur={handleBlur}
+            className={`form-input ${formErrors.phone ? 'form-input--error' : ''}`}
+            aria-invalid={!!formErrors.phone}
+            aria-describedby="phoneError"
             required
           />
+          {formErrors.phone && <span id="phoneError" className="form-error-message" aria-live="polite">{formErrors.phone}</span>}
         </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="address" style={styles.label}>Адреса доставки:</label>
+        <div className="form-group">
+          <label htmlFor="address" className="form-label">Адреса доставки:</label>
           {isLoggedIn && profileData.addresses && profileData.addresses.length > 0 ? (
             <>
-              <div style={styles.radioGroup}>
-                <label style={styles.radioLabel}>
+              <div className="form-radio-group">
+                <label className="form-radio-label">
                   <input
                     type="radio"
                     name="addressOption"
+                    value="existing"
                     checked={useExistingAddress}
                     onChange={() => {
                       setUseExistingAddress(true);
                       if (profileData.addresses && profileData.addresses.length > 0) {
                         setOrderData(prev => ({ ...prev, address: profileData.addresses[0] }));
+                        setFormErrors(prev => ({ ...prev, address: '' })); // Clear error
                       }
                     }}
                   />
                   Вибрати збережену адресу
                 </label>
-                <label style={styles.radioLabel}>
+                <label className="form-radio-label">
                   <input
                     type="radio"
                     name="addressOption"
+                    value="new"
                     checked={!useExistingAddress}
                     onChange={() => {
                       setUseExistingAddress(false);
                       setOrderData(prev => ({ ...prev, address: '' }));
+                      setFormErrors(prev => ({ ...prev, address: '' })); // Clear error
                     }}
                   />
                   Ввести нову адресу
@@ -157,10 +220,17 @@ export default function OrderCheckoutPage() {
 
               {useExistingAddress ? (
                 <select
+                  id="address" // id for label
                   name="address"
                   value={orderData.address}
-                  onChange={handleSelectedAddressChange}
-                  style={styles.input}
+                  onChange={(e) => {
+                     setOrderData(prev => ({ ...prev, address: e.target.value }));
+                     setFormErrors(prev => ({ ...prev, address: '' })); // Clear error
+                  }}
+                  onBlur={handleBlur} // Add onBlur for select as well
+                  className={`form-select ${formErrors.address ? 'form-input--error' : ''}`}
+                  aria-invalid={!!formErrors.address}
+                  aria-describedby="addressError"
                 >
                   {profileData.addresses.map((addr, index) => (
                     <option key={index} value={addr}>{addr}</option>
@@ -169,11 +239,15 @@ export default function OrderCheckoutPage() {
               ) : (
                 <input
                   type="text"
+                  id="address" // id for label
                   name="address"
                   placeholder="Введіть нову адресу"
                   value={orderData.address}
                   onChange={handleChange}
-                  style={styles.input}
+                  onBlur={handleBlur}
+                  className={`form-input ${formErrors.address ? 'form-input--error' : ''}`}
+                  aria-invalid={!!formErrors.address}
+                  aria-describedby="addressError"
                   required
                 />
               )}
@@ -181,88 +255,45 @@ export default function OrderCheckoutPage() {
           ) : (
             <input
               type="text"
-              id="current_address"
+              id="address" // id for label
               name="address"
               placeholder="Введіть адресу доставки"
               value={orderData.address}
               onChange={handleChange}
-              style={styles.input}
+              onBlur={handleBlur}
+              className={`form-input ${formErrors.address ? 'form-input--error' : ''}`}
+              aria-invalid={!!formErrors.address}
+              aria-describedby="addressError"
               required
             />
           )}
+          {formErrors.address && <span id="addressError" className="form-error-message" aria-live="polite">{formErrors.address}</span>}
         </div>
 
-        <div style={styles.formGroup}>
-          <label htmlFor="deliveryTime" style={styles.label}>Бажаний час доставки:</label>
+        <div className="form-group">
+          <label htmlFor="deliveryTime" className="form-label">Бажаний час доставки:</label>
           <input
             type="time"
             id="deliveryTime"
             name="deliveryTime"
             value={orderData.deliveryTime}
             onChange={handleChange}
-            style={styles.input}
+            onBlur={handleBlur}
+            className={`form-input ${formErrors.deliveryTime ? 'form-input--error' : ''}`}
+            aria-invalid={!!formErrors.deliveryTime}
+            aria-describedby="deliveryTimeError"
             required
           />
+          {formErrors.deliveryTime && <span id="deliveryTimeError" className="form-error-message" aria-live="polite">{formErrors.deliveryTime}</span>}
         </div>
 
-        <button type="submit" style={styles.button}>Підтвердити замовлення</button>
+        <button type="submit" className="btn btn--primary confirmation-form__submit-button">
+          Підтвердити замовлення
+        </button>
       </form>
-      <p style={{ marginTop: '20px' }}>
-        <Link to="/" style={styles.link}>Повернутись до меню</Link>
-      </p>
+      <div className="confirmation-page__back-link-container">
+        <Link to="/cart" className="confirmation-page__back-link">← Повернутись до кошика</Link>
+      </div>
     </div>
   );
 }
-
-// Стилі залишаються ті ж самі
-const styles = {
-  container: {
-    padding: '20px',
-    maxWidth: '600px',
-    margin: '0 auto',
-    fontFamily: 'Arial, sans-serif',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '15px',
-  },
-  formGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  label: {
-    marginBottom: '5px',
-    fontWeight: 'bold',
-  },
-  input: {
-    padding: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    fontSize: '16px',
-  },
-  radioGroup: {
-    display: 'flex',
-    gap: '10px',
-    marginBottom: '10px',
-  },
-  radioLabel: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '5px',
-    fontWeight: 'normal',
-  },
-  button: {
-    padding: '10px 15px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '16px',
-  },
-  link: {
-    color: '#007bff',
-    textDecoration: 'none',
-  }
-};

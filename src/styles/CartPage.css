@@ -1,0 +1,197 @@
+/* src/styles/CartPage.css */
+
+.cart-page-container {
+  background-color: var(--color-card-bg, #ffffff);
+  padding: 25px 30px;
+  max-width: 700px;
+  margin: 2.5rem auto; /* Відступ зверху/знизу та центрування */
+  border-radius: var(--border-radius-large, 20px);
+  box-shadow: 0px 8px 25px var(--color-shadow-warm, rgba(180, 140, 100, 0.12)),
+    0px 4px 10px var(--color-shadow-warm, rgba(180, 140, 100, 0.08));
+}
+
+.cart-page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-text-headings, #4e4a40);
+  font-size: 2.2em;
+}
+
+.cart-page__empty-message {
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--color-text-secondary, #8d6e63);
+  padding: 25px 0;
+  background-color: rgba(255, 249, 240, 0.5); /* Ледь помітний теплий фон */
+  border-radius: var(--border-radius-medium, 12px);
+}
+
+.cart-items-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0; /* Збільшено вертикальний padding */
+  border-bottom: 1px solid var(--color-border-light, #f0e0d0);
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item__details {
+  flex-grow: 1;
+  color: var(--color-text-primary, #5d4037);
+  font-size: 1em;
+  line-height: 1.5;
+  padding-right: 10px; /* Відступ від кнопки видалення */
+}
+
+.cart-item__remove-button {
+  background: none;
+  border: none;
+  color: var(--color-danger, #e57373);
+  cursor: pointer;
+  font-size: 1.3em;
+  padding: 0; /* Забираємо зайвий padding */
+  margin-left: 15px;
+  border-radius: 50%;
+  width: 36px; /* Збільшено розмір кнопки */
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.cart-item__remove-button:hover {
+  background-color: rgba(
+    229,
+    115,
+    115,
+    0.1
+  ); /* Світло-червоний фон при наведенні */
+  color: var(
+    --color-danger-hover,
+    #d32f2f
+  ); /* Темніший червоний при наведенні */
+}
+
+.cart-item__remove-button:active {
+  transform: scale(0.9);
+}
+
+.cart-page__total {
+  font-size: 1.35em;
+  font-weight: 700;
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  text-align: right;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem; /* Збільшено відступ */
+  color: var(--color-text-primary, #5d4037);
+}
+
+.cart-page__actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cart-page__action-button.btn {
+  width: 100%;
+  padding: 14px 25px; /* Узгоджений padding */
+  font-size: 1.05em;
+  font-family: var(
+    --font-headings,
+    "Nunito",
+    sans-serif
+  ); /* Шрифт з дизайн-коду */
+  font-weight: 700; /* Насиченість з дизайн-коду */
+  border-radius: var(--border-radius-pill, 50px); /* Більш заокруглені */
+  border-width: 2px; /* Для консистентності, якщо деякі кнопки матимуть рамку */
+  border-style: solid;
+  border-color: transparent; /* За замовчуванням без видимої рамки */
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 0px 3px 8px rgba(180, 140, 100, 0.1); /* Легка тепла тінь */
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.cart-page__action-button.btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0px 1px 4px rgba(180, 140, 100, 0.1);
+}
+
+.cart-page__action-button.btn.btn--primary {
+  background-color: var(--color-accent-primary-soft, #ffcba4);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: transparent; /* або var(--color-accent-primary-soft) якщо потрібна тонка рамка */
+}
+
+.cart-page__action-button.btn.btn--primary:hover {
+  background-color: var(--color-accent-primary-soft-hover, #ffb58a);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: transparent; /* або var(--color-accent-primary-soft-hover) */
+  box-shadow: 0px 4px 12px rgba(180, 140, 100, 0.15);
+  transform: translateY(-1px);
+}
+
+.cart-page__action-button.btn.btn--danger {
+  background-color: var(--color-danger-soft, #f7b2b2);
+  color: var(--color-text-on-danger-soft, #8b4513);
+  border-color: transparent; /* або var(--color-danger-soft) */
+}
+
+.cart-page__action-button.btn.btn--danger:hover {
+  background-color: var(--color-danger-soft-hover, #f09a9a);
+  color: var(--color-text-on-danger-soft, #8b4513);
+  border-color: transparent; /* або var(--color-danger-soft-hover) */
+  box-shadow: 0px 4px 12px rgba(180, 140, 100, 0.15);
+  transform: translateY(-1px);
+}
+
+.cart-page__back-link-container {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.cart-page__back-link {
+  color: var(--color-accent-primary, #ff8c61);
+  text-decoration: none;
+  font-weight: 600;
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  padding: 10px 15px; /* Збільшено padding */
+  border-radius: var(--border-radius-medium, 12px);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-block; /* Щоб padding застосовувався коректно */
+}
+
+.cart-page__back-link:hover {
+  color: var(--color-accent-secondary, #ffab76);
+  background-color: rgba(255, 237, 213, 0.5);
+}
+
+/* Адаптивність для кнопок дій */
+@media (min-width: 600px) {
+  .cart-page__actions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .cart-page__actions .cart-page__action-button.btn {
+    width: auto;
+    flex-grow: 1;
+  }
+
+  .cart-page__actions .cart-page__action-button.btn:not(:last-child) {
+    margin-right: 15px;
+  }
+}

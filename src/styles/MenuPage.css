@@ -1,0 +1,174 @@
+/* src/styles/MenuPage.css */
+
+.menu-page-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2.5em;
+  color: var(--color-text-headings, #4e4a40);
+}
+
+.category-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 3rem;
+}
+
+.category-filters__button {
+  padding: 10px 22px;
+  font-size: 0.95em;
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid var(--color-accent-secondary, #ffab76);
+  background-color: var(--color-card-bg, #ffffff);
+  color: var(--color-accent-secondary, #ffab76);
+  border-radius: var(--border-radius-extra-large, 30px);
+  transition: all 0.25s ease;
+  box-shadow: 0px 2px 5px rgba(180, 140, 100, 0.08);
+}
+
+.category-filters__button:hover {
+  background-color: var(--color-accent-secondary, #ffab76);
+  color: var(--color-card-bg, #ffffff);
+  border-color: var(--color-accent-secondary, #ffab76);
+  box-shadow: 0px 4px 10px rgba(180, 140, 100, 0.12);
+  transform: translateY(-1px);
+}
+
+.category-filters__button--active {
+  background-color: var(--color-accent-primary, #ff8c61);
+  color: var(--color-card-bg, #ffffff);
+  border-color: var(--color-accent-primary, #ff8c61);
+  font-weight: 700;
+  box-shadow: 0px 3px 8px rgba(200, 100, 50, 0.2);
+}
+
+.category-filters__button--active:hover {
+  background-color: var(--color-accent-primary, #ff8c61);
+  color: var(--color-card-bg, #ffffff);
+  border-color: var(--color-accent-primary, #ff8c61);
+  transform: translateY(
+    0
+  ); /* Забираємо ефект підйому для вже активної кнопки */
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px; /* Збільшено відступ між картками */
+  align-items: stretch; /* Картки в одному ряду матимуть однакову висоту */
+}
+
+.menu-card {
+  background-color: var(--color-card-bg, #ffffff);
+  border-radius: var(--border-radius-large, 20px);
+  box-shadow: 0px 8px 25px var(--color-shadow-warm, rgba(180, 140, 100, 0.12)),
+    0px 4px 10px rgba(180, 140, 100, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0px 12px 35px rgba(180, 140, 100, 0.15),
+    0px 6px 15px rgba(180, 140, 100, 0.1);
+}
+*/ .menu-card__image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #f0f0f0; /* Колір-заповнювач, поки вантажиться зображення */
+  border-top-left-radius: var(
+    --border-radius-large,
+    20px
+  ); /* Якщо зображення - перший елемент */
+  border-top-right-radius: var(--border-radius-large, 20px);
+}
+
+.menu-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-card__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Дозволяє тілу картки розтягуватися */
+}
+
+.menu-card__title {
+  font-size: 1.3em;
+  font-weight: 700;
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  color: var(--color-accent-primary, #ff8c61);
+  margin: 0 0 10px 0;
+  min-height: 2.8em; /* Приблизно на 2 рядки тексту, для вирівнювання висоти */
+}
+
+.menu-card__description {
+  font-size: 0.9em;
+  color: var(--color-text-secondary, #8d6e63);
+  line-height: 1.6; /* Збільшено для кращої читабельності */
+  margin: 0 0 15px 0;
+  flex-grow: 1;
+  min-height: 4.5em; /* Приблизно на 3 рядки тексту */
+}
+
+.menu-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Притискає футер до низу .menu-card__body */
+  padding-top: 15px;
+  border-top: 1px solid var(--color-border-light, #f0e0d0);
+}
+
+.menu-card__price {
+  font-size: 1.25em;
+  color: var(--color-text-primary, #5d4037);
+  font-weight: 700;
+  margin: 0;
+}
+
+.menu-card__add-button.btn {
+  background-color: var(--color-accent-primary, #ff8c61);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.6em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 10px rgba(255, 140, 97, 0.35); /* Тінь в тон кнопки */
+  transition: background-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.menu-card__add-button.btn:hover {
+  background-color: var(--color-accent-secondary, #ffab76);
+  transform: scale(1.05) translateY(-1px);
+  box-shadow: 0px 5px 15px rgba(255, 171, 118, 0.4);
+}
+
+.menu-page__no-items {
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--color-text-secondary, #8d6e63);
+  margin-top: 3rem;
+  padding: 25px;
+  background-color: var(--color-card-bg, #ffffff);
+  border-radius: var(--border-radius-medium, 12px);
+  box-shadow: 0px 4px 15px var(--color-shadow-warm, rgba(180, 140, 100, 0.1));
+}

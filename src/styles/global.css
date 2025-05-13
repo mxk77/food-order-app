@@ -115,8 +115,19 @@ svg {
   --color-card-bg: #ffffff;
   --color-border-light: #f0e0d0;
   --color-shadow-warm: rgba(180, 140, 100, 0.12);
+  --color-danger: #e57373;
+  --color-danger-hover: #d32f2f;
+  --color-accent-primary-soft: #ffcba4;
+  --color-accent-primary-soft-hover: #ffb58a;
+  --color-text-on-accent-soft: #734d26;
+
+  --color-danger-soft: #f7b2b2;
+  --color-danger-soft-hover: #f09a9a;
+  --color-text-on-danger-soft: #8b4513;
 
   --border-radius-medium: 12px;
   --border-radius-large: 20px;
   --border-radius-extra-large: 30px;
+
+  --border-radius-pill: 50px;
 }
