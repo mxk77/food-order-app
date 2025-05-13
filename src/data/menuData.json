@@ -29,7 +29,7 @@
       "category": "Піца",
       "price": 270,
       "description": "Тропічний смак з ніжною копченою куркою, соковитими ананасами, кукурудзою, моцарелою та фірмовим білим соусом.",
-      "imagePath": "/images/menu/hawaiian_dream.jpg"
+      "imagePath": "/images/menu/hawaiian.png"
     },
     {
       "id": "pizza5",
@@ -37,7 +37,7 @@
       "category": "Піца",
       "price": 350,
       "description": "Багатство моря на вашій тарілці: тигрові креветки, мідії, кальмари, восьминіг, томатний соус, моцарела, часник та свіжа петрушка.",
-      "imagePath": "/images/menu/seafood_fantasy.jpg"
+      "imagePath": "/images/menu/seafood_fantasy.png"
     },
     {
       "id": "pizza6",
@@ -45,7 +45,7 @@
       "category": "Піца",
       "price": 280,
       "description": "100% веганська піца з томатним соусом, веганською моцарелою, артишоками, оливками каламата, в'яленими томатами та свіжим орегано.",
-      "imagePath": "/images/menu/vegan_delight.jpg"
+      "imagePath": "/images/menu/vegan_delight.png"
     },
     {
       "id": "salad1",
@@ -53,7 +53,7 @@
       "category": "Салати",
       "price": 225,
       "description": "Хрустке листя ромен, соковиті тигрові креветки на грилі, часникові грінки, перепелині яйця, томати чері, пармезан та класичний соус Цезар.",
-      "imagePath": "/images/menu/caesar_shrimp.jpg"
+      "imagePath": "/images/menu/caesar_shrimp.png"
     },
     {
       "id": "salad2",
@@ -61,7 +61,7 @@
       "category": "Салати",
       "price": 155,
       "description": "Свіжі огірки, соковиті томати, болгарський перець, червона цибуля, сир фета вищого ґатунку, оливки каламата, заправлені оливковою олією та орегано.",
-      "imagePath": "/images/menu/greek_traditional.jpg"
+      "imagePath": "/images/menu/greek_traditional.png"
     },
     {
       "id": "salad3",
@@ -69,7 +69,7 @@
       "category": "Салати",
       "price": 175,
       "description": "Ніжна моцарела ді буфала, стиглі томати, свіжий базилік та ароматний соус песто власного приготування.",
-      "imagePath": "/images/menu/caprese_pesto.jpg"
+      "imagePath": "/images/menu/caprese.png"
     },
     {
       "id": "salad4",
@@ -77,7 +77,7 @@
       "category": "Салати",
       "price": 240,
       "description": "Обсмажені шматочки ніжної телятини, свіжа рукола, томати чері, пармезан та кедрові горішки, заправлені бальзамічною глазур'ю.",
-      "imagePath": "/images/menu/warm_veal_arugula.jpg"
+      "imagePath": "/images/menu/warm_arugula.png"
     },
     {
       "id": "burger1",
@@ -85,7 +85,7 @@
       "category": "Бургери",
       "price": 230,
       "description": "Велика соковита котлета з яловичини Black Angus, хрусткий бекон, подвійний сир чеддер, мариновані огірки, свіжі томати, листя салату айсберг та фірмовий соус BBQ у булочці бріош.",
-      "imagePath": "/images/menu/grand_classic_bacon.jpg"
+      "imagePath": "/images/menu/grand_classic_bacon.png"
     },
     {
       "id": "burger2",
@@ -93,7 +93,7 @@
       "category": "Бургери",
       "price": 210,
       "description": "Ніжна куряча котлета на грилі, кільце ананаса на грилі, сир чеддер, свіжий салат та екзотичний соус карі.",
-      "imagePath": "/images/menu/chicken_pineapple_curry_burger.jpg"
+      "imagePath": "/images/menu/chicken_pineapple_curry_burger.png"
     },
     {
       "id": "burger3",
@@ -101,7 +101,7 @@
       "category": "Бургери",
       "price": 290,
       "description": "Для справжніх гурманів: дві яловичі котлети, подвійний бекон, подвійний сир, карамелізована цибуля, халапеньйо та гострий соус.",
-      "imagePath": "/images/menu/double_trouble_burger.jpg"
+      "imagePath": "/images/menu/double_trouble_burger.png"
     },
     {
       "id": "burger4",
@@ -109,7 +109,7 @@
       "category": "Бургери",
       "price": 235,
       "description": "Великий гриб портобелло на грилі, свіже гуакамоле, веганський сир, рукола, томати та соус на основі тахіні у цільнозерновій булочці.",
-      "imagePath": "/images/menu/vegan_portobello_guacamole_burger.jpg"
+      "imagePath": "/images/menu/vegan_burger.png"
     },
     {
       "id": "main1",
@@ -117,7 +117,7 @@
       "category": "Основні страви",
       "price": 250,
       "description": "Спагеті з гуанчале (в'ялені свинячі щоки), яєчними жовтками, сиром пекоріно романо та чорним перцем. Без вершків!",
-      "imagePath": "/images/menu/pasta_carbonara_authentic.jpg"
+      "imagePath": "/images/menu/pasta_carbonara.png"
     },
     {
       "id": "main2",
@@ -125,15 +125,15 @@
       "category": "Основні страви",
       "price": 285,
       "description": "Неймовірно ніжне куряче філе, приготоване за технологією су-від, подається з сезонними овочами гриль (цукіні, баклажан, перець, томати) та вершковим соусом дорблю.",
-      "imagePath": "/images/menu/chicken_sous_vide_grilled_veg.jpg"
+      "imagePath": "/images/menu/chicken_sous_vide.png"
     },
     {
       "id": "main3",
-      "name": "Лосось на Пару з Пюре з цвітної капусти та Шпинатом",
+      "name": "Лосось на Пару з Пюре з кольорової капусти та Шпинатом",
       "category": "Основні страви",
       "price": 360,
       "description": "Дієтичний та смачний стейк лосося, приготований на пару, подається з ніжним пюре з цвітної капусти та припущеним шпинатом з часником.",
-      "imagePath": "/images/menu/steamed_salmon_cauliflower_puree.jpg"
+      "imagePath": "/images/menu/steamed_salmon.png"
     },
     {
       "id": "soup1",
@@ -141,7 +141,7 @@
       "category": "Супи",
       "price": 130,
       "description": "Насичений томатний суп на овочевому бульйоні зі свіжим базиліком, часником та хрусткими грінками з чіабати.",
-      "imagePath": "/images/menu/tuscan_tomato_soup.jpg"
+      "imagePath": "/images/menu/tuscan_tomato_soup.png"
     },
     {
       "id": "soup2",
@@ -149,7 +149,7 @@
       "category": "Супи",
       "price": 160,
       "description": "Оксамитовий крем-суп з білих грибів та шампіньйонів, з додаванням вершків та ароматної трюфельної олії.",
-      "imagePath": "/images/menu/mushroom_cream_soup_truffle.jpg"
+      "imagePath": "/images/menu/mushroom_truffle.png"
     },
     {
       "id": "dessert1",
@@ -157,7 +157,7 @@
       "category": "Десерти",
       "price": 150,
       "description": "Класичний американський чизкейк на пісочній основі з ніжним вершковим сиром, подається з соусом із свіжих ягід.",
-      "imagePath": "/images/menu/cheesecake_ny_berry.jpg"
+      "imagePath": "/images/menu/cheesecake_berry.png"
     },
     {
       "id": "dessert2",
@@ -165,7 +165,7 @@
       "category": "Десерти",
       "price": 170,
       "description": "Гарячий шоколадний кекс з рідкою лавою всередині, подається з кулькою ванільного морозива та свіжою м'ятою.",
-      "imagePath": "/images/menu/chocolate_fondant_ice_cream.jpg"
+      "imagePath": "/images/menu/chocolate_fondant.png"
     },
     {
       "id": "dessert3",
@@ -173,7 +173,7 @@
       "category": "Десерти",
       "price": 165,
       "description": "Італійський багатошаровий десерт з печива савоярді, просоченого кавою, кремом з маскарпоне та какао.",
-      "imagePath": "/images/menu/tiramisu_classic.jpg"
+      "imagePath": "/images/menu/tiramisu.png"
     },
     {
       "id": "drink1",
@@ -181,15 +181,15 @@
       "category": "Напої",
       "price": 45,
       "description": "Класичний освіжаючий газований напій. 0.5л",
-      "imagePath": "/images/menu/coca-cola.jpg"
+      "imagePath": "/images/menu/coca-cola.png"
     },
     {
       "id": "drink2",
-      "name": "Сік Апельсиновий Фреш",
+      "name": "Апельсиновий Фреш",
       "category": "Напої",
       "price": 75,
       "description": "Свіжовичавлений апельсиновий сік. 0.3л",
-      "imagePath": "/images/menu/orange_juice_fresh.jpg"
+      "imagePath": "/images/menu/orange_juice.png"
     },
     {
       "id": "drink3",
@@ -197,7 +197,7 @@
       "category": "Напої",
       "price": 65,
       "description": "Освіжаючий лимонад власного приготування з лимоном, імбирем та свіжою м'ятою. 0.4л",
-      "imagePath": "/images/menu/lemonade_ginger_mint.jpg"
+      "imagePath": "/images/menu/lemonade.png"
     },
     {
       "id": "drink4",
@@ -205,7 +205,7 @@
       "category": "Напої",
       "price": 60,
       "description": "Класичне італійське капучино на основі еспресо та збитого молока. 0.25л",
-      "imagePath": "/images/menu/cappuccino.jpg"
+      "imagePath": "/images/menu/cappuccino.png"
     },
     {
       "id": "drink5",
@@ -213,7 +213,7 @@
       "category": "Напої",
       "price": 55,
       "description": "Ароматний японський зелений чай Сенча з квітами жасмину. 0.4л",
-      "imagePath": "/images/menu/green_tea_sencha_jasmine.jpg"
+      "imagePath": "/images/menu/green_tea.png"
     },
     {
       "id": "drink6",
@@ -221,6 +221,6 @@
       "category": "Напої",
       "price": 85,
       "description": "Освіжаючий коктейль з лаймом, м'ятою, содовою та полуничним пюре. 0.4л",
-      "imagePath": "/images/menu/mojito_strawberry_nonalc.jpg"
+      "imagePath": "/images/menu/mojito.png"
     }
   ]
