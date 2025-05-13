@@ -1,0 +1,341 @@
+/* src/styles/ProfilePage.css */
+
+.profile-page-container {
+  background-color: var(--color-card-bg, #ffffff);
+  padding: 30px 35px;
+  max-width: 600px;
+  margin: 2.5rem auto;
+  border-radius: var(--border-radius-large, 20px);
+  box-shadow: 0px 8px 25px var(--color-shadow-warm, rgba(180, 140, 100, 0.12)),
+    0px 4px 10px var(--color-shadow-warm, rgba(180, 140, 100, 0.08));
+}
+
+.profile-page-title, /* Для заголовка "Профіль користувача" */
+  .form-section__title {
+  /* Для заголовків "Створити обліковий запис", "Увійти" */
+  text-align: center;
+  margin-bottom: 1.8rem;
+  color: var(--color-text-headings, #4e4a40);
+  font-size: 2em; /* Трохи менше, ніж головний заголовок сторінки */
+  font-family: var(--font-headings, "Nunito", sans-serif);
+}
+
+.profile_addresses-title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5em;
+  text-align: left;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Відстань між елементами форми */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  color: var(--color-text-primary, #5d4037);
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.form-input,
+.form-select {
+  /* Стилі з OrderCheckoutPage, адаптовані */
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border-light, #f0e0d0);
+  border-radius: var(--border-radius-medium, 12px);
+  background-color: var(--color-bg-input, #fffdf5);
+  color: var(--color-text-primary, #5d4037);
+  font-size: 1em;
+  font-family: var(--font-primary, "Open Sans", sans-serif);
+  box-shadow: inset 0px 1px 3px rgba(180, 140, 100, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder {
+  color: var(--color-text-secondary, #a1887f);
+  opacity: 0.8;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-accent-primary, #ff8c61);
+  box-shadow: inset 0px 1px 3px rgba(180, 140, 100, 0.08),
+    0 0 0 3px rgba(255, 140, 97, 0.25);
+}
+
+.form-input--error {
+  border-color: var(
+    --color-danger,
+    #e57373
+  ) !important; /* !important для пріоритету */
+  background-color: #fff0f0;
+}
+
+.form-input--error:focus {
+  border-color: var(--color-danger-hover, #d32f2f) !important;
+  box-shadow: inset 0px 1px 3px rgba(180, 140, 100, 0.08),
+    0 0 0 3px rgba(229, 115, 115, 0.3) !important;
+}
+
+.form-error-message {
+  color: var(--color-danger, #e57373);
+  font-size: 0.875em;
+  font-weight: 500;
+  margin-top: 2px; /* Невеликий відступ зверху */
+}
+
+.form-error-message--inline {
+  /* Для помилок поряд з інпутом в режимі редагування профілю */
+  display: block;
+  margin-left: calc(
+    var(--profile-info-label-width, 100px) + 10px
+  ); /* Приблизний відступ */
+}
+
+/* --- Базовий стиль для всіх кнопок --- */
+.btn {
+  padding: 12px 28px;
+  border: none; /* За замовчуванням без рамки */
+  border-radius: var(--border-radius-pill, 50px);
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  font-weight: 700;
+  font-size: 1em; /* Базовий розмір, може бути змінений специфічними класами */
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 0px 3px 8px rgba(180, 140, 100, 0.08); /* Легка тепла тінь */
+  border-width: 2px; /* Зарезервуємо місце для рамки, якщо вона з'явиться */
+  border-style: solid;
+  border-color: transparent; /* Робимо рамку прозорою за замовчуванням */
+}
+
+.btn:hover {
+  box-shadow: 0px 4px 12px rgba(180, 140, 100, 0.12);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0px 1px 4px rgba(180, 140, 100, 0.1);
+}
+
+.btn--primary {
+  background-color: var(--color-accent-primary-soft, #ffcba4);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: var(--color-accent-primary-soft, #ffcba4);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-accent-primary-soft-hover, #ffb58a);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: var(--color-accent-primary-soft-hover, #ffb58a);
+}
+
+.btn--secondary {
+  background-color: var(--color-bg-button-secondary-soft, #fff7ee);
+  color: var(--color-text-button-secondary-soft, #e08d5b);
+  border-color: var(--color-border-button-secondary-soft, #ffdab9);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-border-button-secondary-soft, #ffdab9);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: var(--color-border-button-secondary-soft, #ffdab9);
+}
+
+.btn--danger {
+  background-color: var(--color-danger-soft, #f7b2b2);
+  color: var(--color-text-on-danger-soft, #8b4513);
+  border-color: var(--color-danger-soft, #f7b2b2);
+}
+
+.btn--danger:hover {
+  background-color: var(--color-danger-soft-hover, #f09a9a);
+  color: var(--color-text-on-danger-soft, #8b4513);
+  border-color: var(--color-danger-soft-hover, #f09a9a);
+}
+
+.form-error-message--general {
+  /* Для загальних помилок форми */
+  text-align: center;
+  padding: 10px;
+  background-color: #fff0f0;
+  border-radius: var(--border-radius-medium, 12px);
+  border: 1px solid var(--color-danger-soft, #f7b2b2);
+  margin-bottom: 10px;
+}
+
+.form-link-button {
+  background: none;
+  border: none;
+  color: var(--color-accent-primary, #ff8c61);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-primary, "Open Sans", sans-serif);
+  font-size: 0.95em;
+  font-weight: 600;
+}
+
+.form-link-button:hover {
+  color: var(--color-accent-secondary, #ffab76);
+}
+
+.form-section__button {
+  /* Для основних кнопок форм */
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 1.05em;
+}
+
+.form-section__toggle-text {
+  text-align: center;
+  font-size: 0.95em;
+  color: var(--color-text-secondary, #8d6e63);
+  margin-top: 15px;
+}
+
+/* Стилі для відображення профілю */
+.profile-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.profile-info-item {
+  display: flex;
+  align-items: flex-start; /* Вирівнювання по верху, якщо інпут багаторядковий */
+  gap: 10px;
+  font-size: 1em;
+  line-height: 1.6;
+  flex-wrap: wrap; /* Для переносу інпуту на новий рядок при потребі */
+}
+
+.profile-info-label {
+  font-weight: 600;
+  color: var(--color-text-primary, #5d4037);
+  width: var(
+    --profile-info-label-width,
+    100px
+  ); /* Фіксована ширина для вирівнювання */
+  flex-shrink: 0; /* Щоб лейбл не стискався */
+}
+
+.profile-info-value {
+  color: var(--color-text-secondary, #8d6e63);
+  word-break: break-word; /* Для довгих значень без пробілів */
+}
+
+.form-input--inline {
+  /* Для інпутів в режимі редагування профілю */
+  flex-grow: 1;
+  min-width: 200px; /* Мінімальна ширина інпуту */
+}
+
+.profile-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.profile-actions .btn {
+  flex-grow: 1; /* Кнопки займають доступний простір */
+}
+
+@media (max-width: 450px) {
+  .profile-actions .btn {
+    width: 100%;
+    flex-grow: 0;
+  }
+}
+
+/* Адреси */
+.address-list {
+  margin-bottom: 20px;
+}
+
+.address-list__items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.address-list__item {
+  background-color: var(--color-bg-input, #fffdf5);
+  padding: 10px 15px;
+  border-radius: var(--border-radius-medium, 12px);
+  border: 1px solid var(--color-border-light, #f0e0d0);
+  color: var(--color-text-secondary, #8d6e63);
+  font-size: 0.95em;
+}
+
+.address-list__no-items {
+  color: var(--color-text-secondary, #8d6e63);
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+.add-address-form {
+  margin-top: 15px;
+}
+.add-address-form__button.btn {
+  margin-top: 10px;
+  width: auto; /* Не на всю ширину */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.profile-separator {
+  border: none;
+  border-top: 1px solid var(--color-border-light, #f0e0d0);
+  margin: 25px 0;
+}
+
+.profile-logout-button.btn {
+  width: 100%;
+}
+
+/* Стилі для повідомлень про успіх/помилку */
+.auth-message {
+  padding: 12px 18px;
+  margin-bottom: 15px;
+  border-radius: var(--border-radius-medium, 12px);
+  font-weight: 500;
+  text-align: center;
+}
+
+.auth-message--success {
+  background-color: #e6fffa; /* Світло-бірюзовий для успіху */
+  color: #00695c; /* Темно-бірюзовий текст */
+  border: 1px solid #b2dfdb;
+}
+
+.auth-message--error {
+  background-color: #fff0f0; /* Такий же, як для .form-input--error */
+  color: var(--color-danger-hover, #d32f2f); /* Темніший червоний для тексту */
+  border: 1px solid var(--color-danger-soft, #f7b2b2);
+}

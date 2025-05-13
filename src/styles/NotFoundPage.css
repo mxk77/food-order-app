@@ -1,0 +1,76 @@
+/* src/styles/NotFoundPage.css */
+
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  min-height: 50vh;
+}
+
+.not-found-page__title {
+  font-size: 2.8em; /* Трохи більший розмір для акценту */
+  color: var(--color-text-headings, #4e4a40);
+  margin-bottom: 1.5rem; /* Відступ знизу */
+}
+
+.not-found-page__message {
+  /* Стилі для p успадковуються з global.css */
+  font-size: 1.15em; /* Трохи більший текст для повідомлення */
+  color: var(--color-text-secondary, #8d6e63);
+  line-height: 1.7;
+  max-width: 500px; /* Обмежуємо ширину тексту для кращої читабельності */
+  margin-bottom: 2.5rem; /* Відступ до кнопки */
+}
+
+.btn {
+  padding: 12px 28px;
+  border: none; /* За замовчуванням без рамки */
+  border-radius: var(--border-radius-pill, 50px);
+  font-family: var(--font-headings, "Nunito", sans-serif);
+  font-weight: 700;
+  font-size: 1em; /* Базовий розмір, може бути змінений специфічними класами */
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 0px 3px 8px rgba(180, 140, 100, 0.08); /* Легка тепла тінь */
+  border-width: 2px; /* Зарезервуємо місце для рамки, якщо вона з'явиться */
+  border-style: solid;
+  border-color: transparent; /* Робимо рамку прозорою за замовчуванням */
+}
+
+.btn:hover {
+  box-shadow: 0px 4px 12px rgba(180, 140, 100, 0.12);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0px 1px 4px rgba(180, 140, 100, 0.1);
+}
+
+.btn--primary {
+  background-color: var(--color-accent-primary-soft, #ffcba4);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: var(--color-accent-primary-soft, #ffcba4);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-accent-primary-soft-hover, #ffb58a);
+  color: var(--color-text-on-accent-soft, #734d26);
+  border-color: var(--color-accent-primary-soft-hover, #ffb58a);
+}
+
+.not-found-page__actions .btn.btn--primary {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 1.05em; /* Трохи більший шрифт для кнопки */
+}
