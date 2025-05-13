@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-// Мок CartContext для прикладу
-const useCart = () => {
-  return {
-    clearCart: () => console.log('Кошик очищено! (мок)'),
-  };
-};
+import { useCart } from '../context/CartContext';
 
 export default function OrderCheckoutPage() {
   const { clearCart } = useCart();
@@ -18,7 +12,7 @@ export default function OrderCheckoutPage() {
     name: '',
     phone: '',
     address: '',
-    deliveryTime: '', // Буде у форматі HH:MM
+    deliveryTime: '',
   });
 
   const [useExistingAddress, setUseExistingAddress] = useState(true);
@@ -38,14 +32,14 @@ export default function OrderCheckoutPage() {
         setUseExistingAddress(hasAddresses);
 
         setOrderData(prev => ({
-          ...prev, // Зберігаємо попередні значення, якщо вони є (напр. час, якщо введено до завантаження профілю)
+          ...prev, // Зберігаємо попередні значення, якщо вони є
           name: parsedData.name || '',
           phone: parsedData.phone || '',
           address: hasAddresses ? parsedData.addresses[0] : '',
         }));
       } else {
         // Неузгоджений стан: прапорець входу true, але даних користувача немає.
-        // Вважаємо користувача неавторизованим для безпеки.
+        // Вважаємо користувача неавторизованим.
         setIsLoggedIn(false);
         sessionStorage.setItem('isUserLoggedIn', 'false'); // Виправляємо sessionStorage
         setProfileData({ name: '', phone: '', addresses: [] });
@@ -57,14 +51,14 @@ export default function OrderCheckoutPage() {
       setProfileData({ name: '', phone: '', addresses: [] });
       // Скидаємо поля, які могли бути заповнені з профілю
       setOrderData(prev => ({
-        name: '', // Очистити ім'я
-        phone: '', // Очистити телефон
-        address: '', // Очистити адресу
-        deliveryTime: prev.deliveryTime, // Зберігаємо час, якщо користувач його вже ввів
+        name: '',
+        phone: '',
+        address: '',
+        deliveryTime: prev.deliveryTime,
       }));
       setUseExistingAddress(false);
     }
-  }, []); // Запускається один раз
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -187,7 +181,7 @@ export default function OrderCheckoutPage() {
           ) : (
             <input
               type="text"
-              id="current_address" // Змінив id, щоб уникнути конфлікту, якщо б label посилався на "address"
+              id="current_address"
               name="address"
               placeholder="Введіть адресу доставки"
               value={orderData.address}
@@ -201,16 +195,13 @@ export default function OrderCheckoutPage() {
         <div style={styles.formGroup}>
           <label htmlFor="deliveryTime" style={styles.label}>Бажаний час доставки:</label>
           <input
-            type="time" // <--- ЗМІНЕНО ТИП ПОЛЯ
+            type="time"
             id="deliveryTime"
             name="deliveryTime"
-            value={orderData.deliveryTime} // Формат буде "HH:mm"
+            value={orderData.deliveryTime}
             onChange={handleChange}
             style={styles.input}
             required
-            // Для деяких браузерів може знадобитися step="any" або вказання min/max
-            // step="900" // крок 15 хвилин (900 секунд)
-            // min="09:00" max="22:00" // Приклад обмеження часу
           />
         </div>
 

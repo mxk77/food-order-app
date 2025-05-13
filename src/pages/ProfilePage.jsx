@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 async function hashPasswordValue(password) {
   if (!password || typeof password !== 'string' || password.trim() === '') {
-    // Повертаємо null або кидаємо помилку, якщо пароль порожній або невалідний,
-    // щоб уникнути хешування порожніх рядків, якщо це не бажано.
-    // Для логіки "не змінювати пароль, якщо поле порожнє" це буде оброблятися вище.
     return null;
   }
   const encoder = new TextEncoder();
@@ -23,7 +20,6 @@ export default function ProfilePage() {
     email: '',
     password: '', // Це поле використовується ТІЛЬКИ для введення нового/зміненого пароля в формі
     addresses: [],
-    // hashedPassword: '' // Не зберігаємо хеш тут, він буде в sessionStorage
   });
   const [newAddress, setNewAddress] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,11 +48,10 @@ export default function ProfilePage() {
     }
   }, []);
 
-  // Оновлена функція для збереження даних користувача
   const persistUserData = async (currentDataFromState) => {
     let dataToStore = { ...currentDataFromState }; // Копіюємо поточні дані зі стану
 
-    // Якщо є новий пароль для встановлення/зміни (тобто, поле password у формі не порожнє)
+    // Якщо є новий пароль для встановлення/зміни
     if (currentDataFromState.password && currentDataFromState.password.trim() !== '') {
       const hashedPassword = await hashPasswordValue(currentDataFromState.password.trim());
       dataToStore.hashedPassword = hashedPassword; // Зберігаємо хеш
@@ -85,7 +80,7 @@ export default function ProfilePage() {
     }));
   };
 
-  const handleRegister = async () => { // Функція стала асинхронною
+  const handleRegister = async () => {
     if (!userData.name.trim() || !userData.phone.trim() || !userData.password.trim()) {
       alert("Будь ласка, заповніть обов'язкові поля: Ім'я, Телефон та Пароль.");
       return;
@@ -103,16 +98,14 @@ export default function ProfilePage() {
         return;
     }
 
-    await persistUserData(userData); // Чекаємо на хешування та збереження
+    await persistUserData(userData);
     sessionStorage.setItem('isUserLoggedIn', 'true');
     setIsLoggedIn(true);
     setShowLogin(false);
-    // setUserData(prev => ({ ...prev, password: '' })); // persistUserData вже очищує пароль у стані
     alert('Реєстрація успішна! Вас автоматично авторизовано.');
   };
 
-  // ОСНОВНА ЗМІНЕНА ФУНКЦІЯ
-  const handleLogin = async () => { // Функція стала асинхронною
+  const handleLogin = async () => {
     if (!loginCredentials.phone.trim() || !loginCredentials.password.trim()) {
       alert('Будь ласка, введіть телефон та пароль.');
       return;
@@ -124,7 +117,6 @@ export default function ProfilePage() {
 
       if (!parsedStoredData.hashedPassword) {
         alert('Помилка: дані користувача пошкоджені (відсутній хеш пароля). Будь ласка, зареєструйтесь знову.');
-        // Можливо, варто очистити sessionStorage тут або запропонувати скидання
         sessionStorage.removeItem('userData');
         sessionStorage.setItem('isUserLoggedIn', 'false');
         setIsLoggedIn(false);
@@ -139,8 +131,6 @@ export default function ProfilePage() {
         parsedStoredData.phone === loginCredentials.phone.trim() &&
         parsedStoredData.hashedPassword === hashedPasswordAttempt
       ) {
-        // ВАЖЛИВО: `parsedStoredData` не містить plain text password, що добре.
-        // Очищаємо поле `password` у стані `userData` для будь-яких форм.
         setUserData({ ...parsedStoredData, password: '' }); 
         sessionStorage.setItem('isUserLoggedIn', 'true');
         setIsLoggedIn(true);
@@ -167,9 +157,6 @@ export default function ProfilePage() {
         alert("Будь ласка, введіть дійсну адресу електронної пошти для профілю.");
         return;
     }
-    // Якщо userData.password не порожній, persistUserData його захешує і збереже.
-    // Якщо порожній, persistUserData проігнорує поле password для хешування,
-    // і старий hashedPassword залишиться в sessionStorage, якщо він там був.
     if (userData.password && userData.password.trim() !== '' && userData.password.trim().length < 4) {
       alert("Новий пароль повинен містити щонайменше 4 символи.");
       return;
@@ -177,13 +164,12 @@ export default function ProfilePage() {
 
     await persistUserData(userData);
     setIsEditing(false);
-    // setUserData(prev => ({ ...prev, password: '' })); // persistUserData вже очищує пароль у стані
     alert('Профіль оновлено.');
   };
 
   const toggleEditAndSave = () => {
     if (isEditing) {
-      handleProfileSave(); // Тепер асинхронна, але тут можна не чекати, якщо UI реагує оптимістично
+      handleProfileSave();
     } else {
       // При переході в режим редагування, переконуємося, що поле пароля порожнє
       setUserData(prev => ({ ...prev, password: '' }));
